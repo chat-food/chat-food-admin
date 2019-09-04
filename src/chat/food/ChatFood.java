@@ -16,6 +16,8 @@ public class ChatFood {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        TelaDetalhesPedido p = new TelaDetalhesPedido();
+        p.setVisible(true);
     }
     
 }
