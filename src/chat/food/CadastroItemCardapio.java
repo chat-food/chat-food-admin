@@ -5,17 +5,61 @@
  */
 package chat.food;
 
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.Binding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.beansbinding.Bindings;
+
 /**
  *
  * @author Laboratorio
  */
-public class CadastroItemCardapio extends javax.swing.JFrame {
-
+public class CadastroItemCardapio extends javax.swing.JDialog {
+    public ItemCardapio item;
+    private boolean salvouItem = false;
+    
     /**
      * Creates new form CadastroItemCardapio
      */
-    public CadastroItemCardapio() {
+    
+    public CadastroItemCardapio(java.awt.Frame parent, boolean modal, ItemCardapio i) {
+        super(parent, modal);
+        item = i;
         initComponents();
+        initBindings();
+    }
+
+    
+    public void initBindings() {
+        BindingGroup bg = new BindingGroup();
+
+        Binding b = Bindings.createAutoBinding(
+            AutoBinding.UpdateStrategy.READ_WRITE, 
+            item, BeanProperty.create("nome"), // fonte
+            txtNome, BeanProperty.create("text") // target
+        );
+        bg.addBinding(b);
+        
+        b = Bindings.createAutoBinding(
+            AutoBinding.UpdateStrategy.READ_WRITE, 
+            item, BeanProperty.create("preco"), // fonte
+            txtPreco, BeanProperty.create("text") // target
+        );
+        bg.addBinding(b);
+        
+        b = Bindings.createAutoBinding(
+            AutoBinding.UpdateStrategy.READ_WRITE, 
+            item, BeanProperty.create("descricao"), // fonte
+            txtDescricao, BeanProperty.create("text") // target
+        );
+        bg.addBinding(b);
+
+        bg.bind();
+    }
+    
+    public boolean getSalvouItem() {
+        return salvouItem;
     }
 
     /**
@@ -28,26 +72,35 @@ public class CadastroItemCardapio extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        txtNome = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        txtPreco = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPane4 = new javax.swing.JTextPane();
+        txtDescricao = new javax.swing.JTextPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CadastroItemCardapio");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton3.setText("Voltar");
-        jPanel1.add(jButton3);
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btSalvar);
 
-        jButton4.setText("Salvar");
-        jPanel1.add(jButton4);
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btVoltar);
 
         jLabel1.setText("Nome:");
 
@@ -55,11 +108,11 @@ public class CadastroItemCardapio extends javax.swing.JFrame {
 
         jLabel3.setText("Descrição:");
 
-        jScrollPane2.setViewportView(jTextPane2);
+        jScrollPane2.setViewportView(txtNome);
 
-        jScrollPane3.setViewportView(jTextPane3);
+        jScrollPane3.setViewportView(txtPreco);
 
-        jScrollPane4.setViewportView(jTextPane4);
+        jScrollPane4.setViewportView(txtDescricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,7 +123,7 @@ public class CadastroItemCardapio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,14 +147,26 @@ public class CadastroItemCardapio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 174, Short.MAX_VALUE))
+                        .addGap(0, 165, Short.MAX_VALUE))
                     .addComponent(jScrollPane4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setBounds(0, 0, 554, 348);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        System.out.println("NOME: " + item.getNome());
+        System.out.println("PRECO: " + item.getPreco());
+        System.out.println("DESCRICAO: " + item.getDescricao());
+        salvouItem = true;
+        dispose();
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,17 +195,24 @@ public class CadastroItemCardapio extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroItemCardapio().setVisible(true);
+                CadastroItemCardapio dialog = new CadastroItemCardapio(new javax.swing.JFrame(), true, null);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btSalvar;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -148,8 +220,8 @@ public class CadastroItemCardapio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
-    private javax.swing.JTextPane jTextPane4;
+    private javax.swing.JTextPane txtDescricao;
+    private javax.swing.JTextPane txtNome;
+    private javax.swing.JTextPane txtPreco;
     // End of variables declaration//GEN-END:variables
 }

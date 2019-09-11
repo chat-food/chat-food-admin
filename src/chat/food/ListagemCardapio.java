@@ -5,17 +5,58 @@
  */
 package chat.food;
 
+import java.util.List;
+import java.util.LinkedList;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.JTableBinding.ColumnBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+
 /**
  *
  * @author Laboratorio
  */
 public class ListagemCardapio extends javax.swing.JFrame {
-
+    public List<ItemCardapio> lstItemCardapio;
+    
     /**
      * Creates new form ListagemCardapio
      */
     public ListagemCardapio() {
         initComponents();
+        initBindings();
+    }
+    
+    public void initBindings() {
+        lstItemCardapio = new LinkedList<>();
+        lstItemCardapio = ObservableCollections.observableList(lstItemCardapio);
+
+        JTableBinding tb = SwingBindings.createJTableBinding(
+            AutoBinding.UpdateStrategy.READ_WRITE,
+            lstItemCardapio,
+            tbItemCardapio
+        );
+
+        BindingGroup bg = new BindingGroup();
+
+        ColumnBinding cb = tb.addColumnBinding(BeanProperty.create("nome"));
+        cb.setColumnName("Nome");
+        cb.setColumnClass(String.class);
+
+        cb = tb.addColumnBinding(BeanProperty.create("preco"));
+        cb.setColumnName("Preço");
+        cb.setColumnClass(Float.class);
+
+        cb = tb.addColumnBinding(BeanProperty.create("descricao"));
+        cb.setColumnName("Descrição");
+        cb.setColumnClass(String.class);
+
+        bg.addBinding(tb);
+        
+        bg.bind();
     }
 
     /**
@@ -28,7 +69,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
     private void initComponents() {
 
         spItensCardapio = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbItemCardapio = new javax.swing.JTable();
         pnBotoes = new javax.swing.JPanel();
         btAdicionar = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
@@ -37,7 +78,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listagem Cardápio");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbItemCardapio.setAutoCreateRowSorter(true);
+        tbItemCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -48,7 +90,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        spItensCardapio.setViewportView(jTable1);
+        spItensCardapio.setViewportView(tbItemCardapio);
 
         btAdicionar.setText("Adicionar");
         btAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +130,14 @@ public class ListagemCardapio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        // TODO add your handling code here:
+        ItemCardapio item = new ItemCardapio();
+        CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
+        
+        c.setVisible(true);
+        
+        if (c.getSalvouItem()) {
+            lstItemCardapio.add(item);
+        }
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -134,8 +183,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btRemover;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnBotoes;
     private javax.swing.JScrollPane spItensCardapio;
+    private javax.swing.JTable tbItemCardapio;
     // End of variables declaration//GEN-END:variables
 }
