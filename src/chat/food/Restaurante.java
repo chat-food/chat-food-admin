@@ -7,6 +7,7 @@ package chat.food;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import javax.swing.JTextField;
 
 /**
  *
@@ -14,27 +15,40 @@ import java.beans.PropertyChangeSupport;
  */
 public class Restaurante {
 
-    public String nome;
+    String nome;
 
     public static final String PROP_NOME = "nome";
 
     public String getNome() {
         return nome;
     }
-    private String senha;
+    private char[] senha;
 
     public static final String PROP_SENHA = "senha";
 
-    public String getSenha() {
+    public char[] getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        String oldSenha = this.senha;
+    public void setSenha(char[] senha) {
+        char[] oldSenha = this.senha;
         this.senha = senha;
         propertyChangeSupport.firePropertyChange(PROP_SENHA, oldSenha, senha);
     }
 
+    private String telefone;
+
+    public static final String PROP_TELEFONE = "telefone";
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        String oldTelefone = this.telefone;
+        this.telefone = telefone;
+        propertyChangeSupport.firePropertyChange(PROP_TELEFONE, oldTelefone, telefone);
+    }
 
     public void setNome(String nome) {
         String oldNome = this.nome;
@@ -52,7 +66,7 @@ public class Restaurante {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
-    public String descricao;
+    String descricao;
 
     public static final String PROP_DESCRICAO = "descricao";
 
@@ -80,14 +94,14 @@ public class Restaurante {
         propertyChangeSupport.firePropertyChange(PROP_ID_RESTAURANTE, oldId_restaurante, id_restaurante);
     }
 
-    public String horario_ini;
+    private String horario_ini;
 
     public static final String PROP_HORARIO_INI = "horario_ini";
 
     public String getHorario_ini() {
         return horario_ini;
     }
-    public String horario_fim;
+    private String horario_fim;
 
     public static final String PROP_HORARIO_FIM = "horario_fim";
 
@@ -106,6 +120,14 @@ public class Restaurante {
         String oldHorario_ini = this.horario_ini;
         this.horario_ini = horario_ini;
         propertyChangeSupport.firePropertyChange(PROP_HORARIO_INI, oldHorario_ini, horario_ini);
+    }
+
+    void setHorario_ini(JTextField txtDe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setHorario_fim(JTextField txtAte) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
