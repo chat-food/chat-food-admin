@@ -5,17 +5,59 @@
  */
 package chat.food;
 
+import java.util.List;
+import java.util.LinkedList;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.observablecollections.ObservableCollections;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.JTableBinding.ColumnBinding;
+import org.jdesktop.swingbinding.SwingBindings;
+
 /**
  *
  * @author Laboratorio
  */
 public class JanelaListagemPedidos extends javax.swing.JFrame {
 
+    private List<Pedido> pedidos;
+    
     /**
      * Creates new form JanelaListagemPedidos
      */
     public JanelaListagemPedidos() {
+        pedidos = new LinkedList<>();
+        pedidos = ObservableCollections.observableList(pedidos);
         initComponents();
+        
+        BindingGroup bg = new BindingGroup();
+        JTableBinding tb = SwingBindings.createJTableBinding(
+            AutoBinding.UpdateStrategy.READ_WRITE,
+            pedidos,
+            tbPedidos
+        );
+        ColumnBinding cb = tb.addColumnBinding(
+            BeanProperty.create("id_pedido")
+        );
+        cb.setColumnName("ID");
+        cb.setColumnClass(Integer.class);
+        
+        cb = tb.addColumnBinding(BeanProperty.create("descricao"));
+        cb.setColumnName("Descrição");
+        cb.setColumnClass(String.class);
+        
+        cb = tb.addColumnBinding(BeanProperty.create("valor_total"));
+        cb.setColumnName("Valor Total");
+        cb.setColumnClass(Double.class);
+        
+        cb = tb.addColumnBinding(BeanProperty.create("status"));
+        cb.setColumnName("Status");
+        cb.setColumnClass(Enum.class);
+        
+        bg.addBinding(tb);
+        
+        bg.bind();
     }
 
     /**
@@ -31,7 +73,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         confirmButton = new javax.swing.JButton();
         detailsButton = new javax.swing.JButton();
         ListaPedidos = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbPedidos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listagem de Pedidos");
@@ -47,7 +89,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         });
         jPanel1.add(detailsButton);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -58,7 +100,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        ListaPedidos.setViewportView(jTable1);
+        ListaPedidos.setViewportView(tbPedidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +165,6 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton detailsButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbPedidos;
     // End of variables declaration//GEN-END:variables
 }

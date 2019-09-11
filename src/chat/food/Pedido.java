@@ -4,6 +4,13 @@ package chat.food;
 public class Pedido {
 
     private int id_pedido;
+    private String descricao;
+    private double valor_total;
+    private Status status;
+    
+    public Pedido(){
+        status = Status.ABERTO;
+    }
 
     public int getId_pedido() {
         return id_pedido;
@@ -13,7 +20,6 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
-    private String descricao;
 
     public String getDescricao() {
         return descricao;
@@ -23,15 +29,24 @@ public class Pedido {
         this.descricao = descricao;
     }
     
-    private float valor_total;
-
-    public float getValor_total() {
+    
+    public double getValor_total() {
         return valor_total;
     }
 
-    public void setValor_total(float valor_total) {
+    public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    
+    
 
     private int restaurante_id_restaurante;
 
