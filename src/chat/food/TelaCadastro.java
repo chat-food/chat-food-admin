@@ -230,6 +230,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                     dataInicio, dataFim);
             
             System.out.println("O restaurante "+restaurante.getNome()+" \n"+restaurante.getDescricao()+"\n Horario de Funcionamento: "+restaurante.getHoraIni()+" ate "+restaurante.getHoraFim());
+            new TelaLogin().setVisible(true);
+            this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -240,6 +242,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         new TelaLogin().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
