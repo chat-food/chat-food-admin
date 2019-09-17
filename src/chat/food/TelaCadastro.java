@@ -1,5 +1,11 @@
 package chat.food;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 
@@ -215,15 +221,18 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDeActionPerformed
 
     private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
-        Restaurante r = new Restaurante();
-        r.setDescricao(txtDescricao.getText());
-        r.setNome(txtNome.getText());
-        r.setSenha(txtSenha.getPassword());
-        r.setHorario_ini(txtDe.getText());
-        r.setHorario_fim(txtAte.getText());
-        r.setTelefone(txtTelefone.getText());
         
-        System.out.println("O restaurante "+r.getNome()+" \n"+r.getDescricao()+"\n Horario de Funcionamento: "+r.getHorario_ini()+" ate "+r.getHorario_fim());
+        try {
+            Date dataInicio = new SimpleDateFormat("HH:mm").parse(txtDe.getText());
+            Date dataFim = new SimpleDateFormat("HH:mm").parse(txtAte.getText());
+            
+            Restaurante restaurante = new Restaurante(txtNome.getText(),txtSenha.getPassword(),txtTelefone.getText(),txtDescricao.getText(),
+                    dataInicio, dataFim);
+            
+            System.out.println("O restaurante "+restaurante.getNome()+" \n"+restaurante.getDescricao()+"\n Horario de Funcionamento: "+restaurante.getHoraIni()+" ate "+restaurante.getHoraFim());
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         
