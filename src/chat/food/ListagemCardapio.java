@@ -45,17 +45,14 @@ public class ListagemCardapio extends javax.swing.JFrame {
         ColumnBinding cb = tb.addColumnBinding(BeanProperty.create("nome"));
         cb.setColumnName("Nome");
         cb.setColumnClass(String.class);
-        cb.setEditable(false);
 
         cb = tb.addColumnBinding(BeanProperty.create("preco"));
         cb.setColumnName("Preço");
         cb.setColumnClass(Float.class);
-        cb.setEditable(false);
         
         cb = tb.addColumnBinding(BeanProperty.create("descricao"));
         cb.setColumnName("Descrição");
         cb.setColumnClass(String.class);
-        cb.setEditable(false);
 
         bg.addBinding(tb);
         
@@ -76,6 +73,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
         pnBotoes = new javax.swing.JPanel();
         btListagemPedidos = new javax.swing.JButton();
         btAdicionar = new javax.swing.JButton();
+        btEditar = new javax.swing.JButton();
         btRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,15 +90,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         spItensCardapio.setViewportView(tbItemCardapio);
 
         btListagemPedidos.setText("Listagem dos Pedidos");
@@ -118,6 +108,9 @@ public class ListagemCardapio extends javax.swing.JFrame {
             }
         });
         pnBotoes.add(btAdicionar);
+
+        btEditar.setText("Editar");
+        pnBotoes.add(btEditar);
 
         btRemover.setText("Remover");
         btRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +204,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
+    private javax.swing.JButton btEditar;
     private javax.swing.JButton btListagemPedidos;
     private javax.swing.JButton btRemover;
     private javax.swing.JPanel pnBotoes;
