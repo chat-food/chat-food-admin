@@ -28,6 +28,13 @@ public class ChatFood extends JDesktopPane{
         public void fecharCadCliente(){
             cadRestaurante=null;
         }
-        
-    
+  
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String[] args) {
+            // TODO code application logic here
+            TelaDetalhesPedido p = new TelaDetalhesPedido();
+            p.setVisible(true);
+        }
 }
