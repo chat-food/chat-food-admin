@@ -45,14 +45,17 @@ public class ListagemCardapio extends javax.swing.JFrame {
         ColumnBinding cb = tb.addColumnBinding(BeanProperty.create("nome"));
         cb.setColumnName("Nome");
         cb.setColumnClass(String.class);
+        cb.setEditable(false);
 
         cb = tb.addColumnBinding(BeanProperty.create("preco"));
         cb.setColumnName("Preço");
         cb.setColumnClass(Float.class);
-
+        cb.setEditable(false);
+        
         cb = tb.addColumnBinding(BeanProperty.create("descricao"));
         cb.setColumnName("Descrição");
         cb.setColumnClass(String.class);
+        cb.setEditable(false);
 
         bg.addBinding(tb);
         
@@ -71,8 +74,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
         spItensCardapio = new javax.swing.JScrollPane();
         tbItemCardapio = new javax.swing.JTable();
         pnBotoes = new javax.swing.JPanel();
+        btListagemPedidos = new javax.swing.JButton();
         btAdicionar = new javax.swing.JButton();
-        btEditar = new javax.swing.JButton();
         btRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,8 +92,24 @@ public class ListagemCardapio extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         spItensCardapio.setViewportView(tbItemCardapio);
+
+        btListagemPedidos.setText("Listagem dos Pedidos");
+        btListagemPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListagemPedidosActionPerformed(evt);
+            }
+        });
+        pnBotoes.add(btListagemPedidos);
 
         btAdicionar.setText("Adicionar");
         btAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,9 +118,6 @@ public class ListagemCardapio extends javax.swing.JFrame {
             }
         });
         pnBotoes.add(btAdicionar);
-
-        btEditar.setText("Editar");
-        pnBotoes.add(btEditar);
 
         btRemover.setText("Remover");
         btRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -115,8 +131,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+            .addComponent(pnBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +157,22 @@ public class ListagemCardapio extends javax.swing.JFrame {
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
-        // TODO add your handling code here:
+        int idx[] = tbItemCardapio.getSelectedRows();
+        List<ItemCardapio> apagar = new LinkedList<>();
+        tbItemCardapio.getSelectionModel().setSelectionInterval(0,0);
+        for(int i=0;i<idx.length;i++){
+            int idxTab = idx[i];
+            int idxLista = tbItemCardapio.convertRowIndexToModel(idxTab);
+            apagar.add(lstItemCardapio.get(idxLista));
+        }
+        
+        lstItemCardapio.removeAll(apagar);
     }//GEN-LAST:event_btRemoverActionPerformed
+
+    private void btListagemPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListagemPedidosActionPerformed
+        new JanelaListagemPedidos().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btListagemPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +211,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
-    private javax.swing.JButton btEditar;
+    private javax.swing.JButton btListagemPedidos;
     private javax.swing.JButton btRemover;
     private javax.swing.JPanel pnBotoes;
     private javax.swing.JScrollPane spItensCardapio;
