@@ -50,7 +50,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
         cb = tb.addColumnBinding(BeanProperty.create("preco"));
         cb.setColumnName("Preço");
         cb.setColumnClass(Float.class);
-
+        
         cb = tb.addColumnBinding(BeanProperty.create("descricao"));
         cb.setColumnName("Descrição");
         cb.setColumnClass(String.class);
@@ -72,6 +72,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
         spItensCardapio = new javax.swing.JScrollPane();
         tbItemCardapio = new javax.swing.JTable();
         pnBotoes = new javax.swing.JPanel();
+        btListagemPedidos = new javax.swing.JButton();
         btAdicionar = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
         btRemover = new javax.swing.JButton();
@@ -92,6 +93,14 @@ public class ListagemCardapio extends javax.swing.JFrame {
             }
         ));
         spItensCardapio.setViewportView(tbItemCardapio);
+
+        btListagemPedidos.setText("Listagem dos Pedidos");
+        btListagemPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListagemPedidosActionPerformed(evt);
+            }
+        });
+        pnBotoes.add(btListagemPedidos);
 
         btAdicionar.setText("Adicionar");
         btAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,8 +130,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+            .addComponent(pnBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,6 +192,11 @@ public class ListagemCardapio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btEditarActionPerformed
 
+    private void btListagemPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListagemPedidosActionPerformed
+        new JanelaListagemPedidos().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btListagemPedidosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -221,6 +235,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btEditar;
+    private javax.swing.JButton btListagemPedidos;
     private javax.swing.JButton btRemover;
     private javax.swing.JPanel pnBotoes;
     private javax.swing.JScrollPane spItensCardapio;

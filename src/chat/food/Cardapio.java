@@ -13,7 +13,7 @@ import java.beans.PropertyChangeSupport;
  * @author Laboratorio
  */
 public class Cardapio {
-    
+
     private int idCardapio;
 
     public static final String PROP_IDCARDAPIO = "idCardapio";

@@ -74,6 +74,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         detailsButton = new javax.swing.JButton();
         ListaPedidos = new javax.swing.JScrollPane();
         tbPedidos = new javax.swing.JTable();
+        btVisualizarCardapio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listagem de Pedidos");
@@ -102,19 +103,31 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         ));
         ListaPedidos.setViewportView(tbPedidos);
 
+        btVisualizarCardapio.setText("Visualizar Cardápio");
+        btVisualizarCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisualizarCardapioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ListaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btVisualizarCardapio)
+                .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ListaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ListaPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(btVisualizarCardapio)
+                .addGap(35, 35, 35)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -124,6 +137,12 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_detailsButtonActionPerformed
+
+    private void btVisualizarCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarCardapioActionPerformed
+        
+        new ListagemCardapio().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btVisualizarCardapioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +181,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ListaPedidos;
+    private javax.swing.JButton btVisualizarCardapio;
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton detailsButton;
     private javax.swing.JPanel jPanel1;
