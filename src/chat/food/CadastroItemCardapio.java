@@ -85,6 +85,9 @@ public class CadastroItemCardapio extends javax.swing.JDialog {
         txtDescricao = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Item no Cardápio");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("Cadastro de um novo item do cardápio"); // NOI18N
 
         btSalvar.setText("Salvar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
