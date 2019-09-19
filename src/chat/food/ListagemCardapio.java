@@ -7,6 +7,7 @@ package chat.food;
 
 import java.util.List;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -110,6 +111,11 @@ public class ListagemCardapio extends javax.swing.JFrame {
         pnBotoes.add(btAdicionar);
 
         btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarActionPerformed(evt);
+            }
+        });
         pnBotoes.add(btEditar);
 
         btRemover.setText("Remover");
@@ -130,12 +136,12 @@ public class ListagemCardapio extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setBounds(0, 0, 544, 399);
+        setBounds(0, 0, 544, 401);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
@@ -150,17 +156,41 @@ public class ListagemCardapio extends javax.swing.JFrame {
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
-        int idx[] = tbItemCardapio.getSelectedRows();
-        List<ItemCardapio> apagar = new LinkedList<>();
-        tbItemCardapio.getSelectionModel().setSelectionInterval(0,0);
-        for(int i=0;i<idx.length;i++){
-            int idxTab = idx[i];
-            int idxLista = tbItemCardapio.convertRowIndexToModel(idxTab);
-            apagar.add(lstItemCardapio.get(idxLista));
+        int[] linhas = tbItemCardapio.getSelectedRows();
+        
+        List<ItemCardapio> lstTmpItemCardapio = new LinkedList<>();
+        tbItemCardapio.getSelectionModel().setSelectionInterval(0, 0);  
+        for (int linha : linhas) {
+            int idxLista = tbItemCardapio.convertRowIndexToModel(linha);
+            lstTmpItemCardapio.add(lstItemCardapio.get(idxLista));
         }
         
-        lstItemCardapio.removeAll(apagar);
+        lstItemCardapio.removeAll(lstTmpItemCardapio);
     }//GEN-LAST:event_btRemoverActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        if (tbItemCardapio.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um registro!");
+        } else if (tbItemCardapio.getSelectedRows().length > 1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione apenas um registro!");
+        } else {
+            int linha = tbItemCardapio.getSelectedRow();
+            int idxLista = tbItemCardapio.convertRowIndexToModel(linha);
+            
+            ItemCardapio itemSelecionado = lstItemCardapio.get(idxLista);
+            ItemCardapio item = new ItemCardapio();
+            item.setNome(itemSelecionado.getNome());
+            item.setPreco(itemSelecionado.getPreco());
+            item.setDescricao(itemSelecionado.getDescricao());
+            
+            CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
+            c.setVisible(true);
+
+            if (c.getSalvouItem()) {
+                lstItemCardapio.set(idxLista, item);
+            }
+        }
+    }//GEN-LAST:event_btEditarActionPerformed
 
     private void btListagemPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListagemPedidosActionPerformed
         new JanelaListagemPedidos().setVisible(true);
