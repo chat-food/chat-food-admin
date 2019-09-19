@@ -1,81 +1,125 @@
 package chat.food;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.Date;
 
 public class Pedido {
 
-    private int id_pedido;
-    private String descricao;
-    private double valor_total;
-    private Status status;
-    
-    public Pedido(){
+    enum Status {
+        ABERTO, PREPARANDO, FINALIZADO, ENTREGUE;
+    }
+
+    public Pedido() {
         status = Status.ABERTO;
     }
+
+    private int id_pedido;
+
+    public static final String PROP_ID_PEDIDO = "id_pedido";
 
     public int getId_pedido() {
         return id_pedido;
     }
 
     public void setId_pedido(int id_pedido) {
+        int oldId_pedido = this.id_pedido;
         this.id_pedido = id_pedido;
+        propertyChangeSupport.firePropertyChange(PROP_ID_PEDIDO, oldId_pedido, id_pedido);
     }
 
+    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+
+    private String descricao;
+
+    public static final String PROP_DESCRICAO = "descricao";
 
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
+        String oldDescricao = this.descricao;
         this.descricao = descricao;
+        propertyChangeSupport.firePropertyChange(PROP_DESCRICAO, oldDescricao, descricao);
     }
-    
-    
+
+    private double valor_total;
+
+    public static final String PROP_VALOR_TOTAL = "valor_total";
+
     public double getValor_total() {
         return valor_total;
     }
 
     public void setValor_total(double valor_total) {
+        double oldValor_total = this.valor_total;
         this.valor_total = valor_total;
+        propertyChangeSupport.firePropertyChange(PROP_VALOR_TOTAL, oldValor_total, valor_total);
     }
+
+    private Status status;
+
+    public static final String PROP_STATUS = "status";
 
     public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
+        Status oldStatus = this.status;
         this.status = status;
-    }
-    
-    
-
-    private int restaurante_id_restaurante;
-
-    public int getRestaurante_id_restaurante() {
-        return restaurante_id_restaurante;
+        propertyChangeSupport.firePropertyChange(PROP_STATUS, oldStatus, status);
     }
 
-    public void setRestaurante_id_restaurante(int restaurante_id_restaurante) {
-        this.restaurante_id_restaurante = restaurante_id_restaurante;
+    private Restaurante restaurante;
+
+    public static final String PROP_RESTAURANTE = "restaurante";
+
+    public Restaurante getRestaurante() {
+        return restaurante;
     }
 
-    private int cliente_id_cliente;
-
-    public int getCliente_id_cliente() {
-        return cliente_id_cliente;
+    public void setRestaurante(Restaurante restaurante) {
+        Restaurante oldRestaurante = this.restaurante;
+        this.restaurante = restaurante;
+        propertyChangeSupport.firePropertyChange(PROP_RESTAURANTE, oldRestaurante, restaurante);
     }
 
-    public void setCliente_id_cliente(int cliente_id_cliente) {
-        this.cliente_id_cliente = cliente_id_cliente;
+    private Cliente cliente;
+
+    public static final String PROP_CLIENTE = "cliente";
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    private int endereco_id_endereco;
-
-    public int getEndereco_id_endereco() {
-        return endereco_id_endereco;
+    public void setCliente(Cliente cliente) {
+        Cliente oldCliente = this.cliente;
+        this.cliente = cliente;
+        propertyChangeSupport.firePropertyChange(PROP_CLIENTE, oldCliente, cliente);
     }
 
-    public void setEndereco_id_endereco(int endereco_id_endereco) {
-        this.endereco_id_endereco = endereco_id_endereco;
+    private Date horario_pedido;
+
+    public static final String PROP_HORARIO_PEDIDO = "horario_pedido";
+
+    public Date getHorario_pedido() {
+        return horario_pedido;
+    }
+
+    public void setHorario_pedido(Date horario_pedido) {
+        Date oldHorario_pedido = this.horario_pedido;
+        this.horario_pedido = horario_pedido;
+        propertyChangeSupport.firePropertyChange(PROP_HORARIO_PEDIDO, oldHorario_pedido, horario_pedido);
     }
 
 }

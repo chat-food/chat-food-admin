@@ -229,7 +229,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             Restaurante restaurante = new Restaurante(txtNome.getText(),txtSenha.getPassword(),txtTelefone.getText(),txtDescricao.getText(),
                     dataInicio, dataFim);
             
-            System.out.println("O restaurante "+restaurante.getNome()+" \n"+restaurante.getDescricao()+"\n Horario de Funcionamento: "+restaurante.getHoraIni()+" ate "+restaurante.getHoraFim());
+            System.out.println("O restaurante "+restaurante.getNome()+" \n"+restaurante.getDescricao()+"\n Horario de Funcionamento: "+restaurante.getHora_ini()+" ate "+restaurante.getHora_fim());
             new TelaLogin().setVisible(true);
             this.dispose();
         } catch (ParseException ex) {
