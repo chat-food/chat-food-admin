@@ -1,5 +1,6 @@
 package chat.food;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -226,8 +227,31 @@ public class TelaCadastro extends javax.swing.JFrame {
             Date dataInicio = new SimpleDateFormat("HH:mm").parse(txtDe.getText());
             Date dataFim = new SimpleDateFormat("HH:mm").parse(txtAte.getText());
             
-            Restaurante restaurante = new Restaurante(txtNome.getText(),txtSenha.getPassword(),txtTelefone.getText(),txtDescricao.getText(),
-                    dataInicio, dataFim);
+            String[] i_hora_minuto = txtDe.getText().split(":");
+            String i_hora = i_hora_minuto[0];
+            String i_minuto = i_hora_minuto[1];
+            
+            int i_hora_int = Integer.parseInt(i_hora);
+            int i_minuto_int = Integer.parseInt(i_minuto);
+
+            String[] f_hora_minuto = txtAte.getText().split(":");
+            String f_hora = f_hora_minuto[0];
+            String f_minuto = f_hora_minuto[1];
+            
+            int f_hora_int = Integer.parseInt(f_hora);
+            int f_minuto_int = Integer.parseInt(f_minuto);
+            
+            Time data_inicial = new Time(i_hora_int,i_minuto_int,0);
+            Time data_final = new Time(f_hora_int, f_minuto_int,0);
+            
+            RestauranteDAO rd = new RestauranteDAO();
+            
+            
+            Restaurante restaurante = new Restaurante(txtNome.getText(),txtTelefone.getText(),txtDescricao.getText(),
+                    data_inicial, data_final);
+            restaurante.setSenha(txtSenha.getPassword());
+            
+            rd.inserir(restaurante);
             
             System.out.println("O restaurante "+restaurante.getNome()+" \n"+restaurante.getDescricao()+"\n Horario de Funcionamento: "+restaurante.getHora_ini()+" ate "+restaurante.getHora_fim());
             new TelaLogin().setVisible(true);
