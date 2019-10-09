@@ -37,4 +37,25 @@ public class Cardapio {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }
+    
+        private Restaurante restaurante;
+
+    /**
+     * Get the value of restaurante
+     *
+     * @return the value of restaurante
+     */
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    /**
+     * Set the value of restaurante
+     *
+     * @param restaurante new value of restaurante
+     */
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
+    }
+
 }
