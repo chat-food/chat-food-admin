@@ -24,8 +24,8 @@ public class RestauranteDAO extends DAO<Restaurante>{
 
         try{
             String comando = "INSERT INTO restaurante "
-                    + "(id_restaurante,nome,descricao,telefone,hora_inicio,hora_fim,senha) VALUES "
-                    + "(?,?,?,?,?,?,?);";
+                    + "(nome,descricao,telefone,hora_inicio,hora_fim,senha) VALUES "
+                    + "(?,?,?,?,?,?);";
             
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);
@@ -55,7 +55,7 @@ public class RestauranteDAO extends DAO<Restaurante>{
         
         try{
             String comando = "UPDATE restaurante SET"
-                    + "nome= ?,descricao = ?,telefone = ?,hora_inicio= ?,hora_fim= ?,senha = ?;";
+                    + "nome= ?,descricao = ?,telefone = ?,hora_inicio= ?,hora_fim= ?,senha = ? WHERE id_restaurante = ?;";
             
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);
@@ -63,26 +63,43 @@ public class RestauranteDAO extends DAO<Restaurante>{
             stmt.setString(1, element.getNome());
             stmt.setString(2, element.getDescricao());
             stmt.setString(3, element.getTelefone());
-            stmt.setTime(4, (Time) element.getHora_ini());
-            stmt.setTime(5, (Time) element.getHora_fim());
+            stmt.setTime(4, element.getHora_ini());
+            stmt.setTime(5, element.getHora_fim());
             stmt.setString(6, new String(element.getSenha()));
+            stmt.setInt(7, element.getId_restaurante());
             
             int linhas = stmt.executeUpdate();
             if(linhas==1) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 rs.next();
-                element.setId(rs.getInt(1));
                 return true;
             }
         }catch(SQLException e){
-            System.out.println("erro ao inserir: "+ e.getMessage());
+            System.out.println("erro ao alterar: "+ e.getMessage());
         }
         return false;
     }
 
     @Override
     public boolean excluir(Restaurante element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try{
+        String comando = "DELETE FROM restaurante "
+                + "WHERE id_restaurante = ?;";
+                
+        
+        PreparedStatement stmt = conn.prepareStatement(
+                            comando,Statement.RETURN_GENERATED_KEYS);
+
+        stmt.setInt(1, element.getId_restaurante());
+
+        int linhas = stmt.executeUpdate();
+        if(linhas==1) {
+            return true;
+        }
+        }catch(SQLException e){
+        System.out.println("erro ao inserir: "+ e.getMessage());
+        }
+        return false;    
     }
 
     @Override
@@ -96,13 +113,12 @@ public class RestauranteDAO extends DAO<Restaurante>{
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()){
-                Restaurante r = new Restaurante(rs.getString("nome"),rs.getString("telefone"),rs.getString("descricao"),rs.getTime("hora_ini"), rs.getTime("hora_fim"));
+                Restaurante r = new Restaurante(rs.getString("nome"),rs.getString("telefone"),rs.getString("descricao"),rs.getTime("hora_inicio"), rs.getTime("hora_fim"));
                
                         
                 String passwd = new String(r.getSenha());
                 char[] senhaNova = passwd.toCharArray();
                 r.setSenha(senhaNova);
-                
                 r.setId(rs.getInt("id"));
                 lstRestaurantes.add(r);
             }
@@ -112,4 +128,7 @@ public class RestauranteDAO extends DAO<Restaurante>{
         }
         return lstRestaurantes;
     }
+    
+        
+          
 }
