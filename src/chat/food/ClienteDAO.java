@@ -20,6 +20,7 @@ import org.jdesktop.observablecollections.ObservableCollections;
 public class ClienteDAO extends DAO<Cliente>{
     
     
+    @Override
     public boolean inserir(Cliente element) {
 
         try{
@@ -47,6 +48,7 @@ public class ClienteDAO extends DAO<Cliente>{
         return false;
     }
     
+    @Override
        public List<Cliente> listar() {
         List<Cliente> lstClientes = new LinkedList<>();
         lstClientes = ObservableCollections.observableList(lstClientes);
@@ -67,5 +69,15 @@ public class ClienteDAO extends DAO<Cliente>{
             System.out.println("erro ao listar");
         }
         return lstClientes;
+    }
+
+    @Override
+    public boolean alterar(Cliente element) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean excluir(Cliente element) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
