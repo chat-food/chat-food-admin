@@ -73,11 +73,51 @@ public class ClienteDAO extends DAO<Cliente>{
 
     @Override
     public boolean alterar(Cliente element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String comando = "UPDATE cliente SET"
+                    + "id_cliente= ?,nome = ?,telefone = ?;";
+            
+            PreparedStatement stmt = conn.prepareStatement(
+                                comando,Statement.RETURN_GENERATED_KEYS);
+            
+            stmt.setInt(1, element.getIdCliente());
+            stmt.setString(2, element.getNome());
+            stmt.setString(3, element.getTelefone());
+        
+            int linhas = stmt.executeUpdate();
+            if(linhas==1) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                rs.next();
+                return true;
+            }
+        }catch(SQLException e){
+            
+            System.out.println("erro ao alterar: "+ e.getMessage());
+        }
+        return false;
+        
     }
 
     @Override
     public boolean excluir(Cliente element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+        String comando = "DELETE FROM cliente"
+                + "WHERE id_cliente = ?;";
+                
+        
+        PreparedStatement stmt = conn.prepareStatement(
+                            comando,Statement.RETURN_GENERATED_KEYS);
+
+        stmt.setInt(1, element.getIdCliente());
+
+        int linhas = stmt.executeUpdate();
+        if(linhas==1) {
+            return true;
+        }
+        }catch(SQLException e){
+        System.out.println("erro ao inserir: "+ e.getMessage());
+        }
+        return false;    
+        
     }
 }
