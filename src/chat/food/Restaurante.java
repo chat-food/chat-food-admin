@@ -2,6 +2,7 @@ package chat.food;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.Time;
 import java.util.Date;
 
 public class Restaurante {
@@ -72,7 +73,7 @@ public class Restaurante {
         propertyChangeSupport.firePropertyChange(PROP_DESCRICAO, oldDescricao, descricao);
     }
 
-    private int id_restaurante;
+    private Integer id_restaurante;
 
     public final String PROP_ID_RESTAURANTE = "id_restaurante";
 
@@ -80,48 +81,51 @@ public class Restaurante {
         return id_restaurante;
     }
 
-    public void setId_restaurante(int id_restaurante) {
-        int oldId_restaurante = this.id_restaurante;
+    public void setId_restaurante(Integer id_restaurante) {
+        Integer oldId_restaurante = this.id_restaurante;
         this.id_restaurante = id_restaurante;
         propertyChangeSupport.firePropertyChange(PROP_ID_RESTAURANTE, oldId_restaurante, id_restaurante);
     }
 
-    private Date hora_ini;
+    private Time hora_ini;
 
     public static final String PROP_HORA_INI = "hora_ini";
 
-    public Date getHora_ini() {
+    public Time getHora_ini() {
         return hora_ini;
     }
 
-    public void setHora_ini(Date hora_ini) {
-        Date oldHora_ini = this.hora_ini;
+    public void setHora_ini(Time hora_ini) {
+        Time oldHora_ini = this.hora_ini;
         this.hora_ini = hora_ini;
         propertyChangeSupport.firePropertyChange(PROP_HORA_INI, oldHora_ini, hora_ini);
     }
 
-    private Date hora_fim;
+    private Time hora_fim;
 
     public static final String PROP_HORA_FIM = "hora_fim";
 
-    public Date getHora_fim() {
+    public Time getHora_fim() {
         return hora_fim;
     }
 
-    public void setHora_fim(Date hora_fim) {
-        Date oldHora_fim = this.hora_fim;
+    public void setHora_fim(Time hora_fim) {
+        Time oldHora_fim = this.hora_fim;
         this.hora_fim = hora_fim;
         propertyChangeSupport.firePropertyChange(PROP_HORA_FIM, oldHora_fim, hora_fim);
     }
 
-    public Restaurante(String n, char[] pw, String tele, String desc, Date inicio, Date fim) {
+    public Restaurante(String n, String tele, String desc, Time inicio, Time fim) {
         this.id_restaurante++;
         this.nome = n;
-        this.senha = pw;
         this.telefone = tele;
         this.descricao = desc;
         this.hora_ini = inicio;
         this.hora_fim = fim;
     }
 
+    public void setId(Integer id) {
+    Integer oldId = this.id_restaurante;
+    this.id_restaurante = id;
+    }
 }
