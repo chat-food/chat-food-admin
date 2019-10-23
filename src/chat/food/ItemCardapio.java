@@ -14,6 +14,31 @@ import java.beans.PropertyChangeSupport;
  */
 public class ItemCardapio {
     
+    private String idItemCardapio;
+
+    public static final String PROP_IDITEMCARDAPIO = "idItemCardapio";
+
+    /**
+     * Get the value of idItemCardapio
+     *
+     * @return the value of idItemCardapio
+     */
+    public String getIdItemCardapio() {
+        return idItemCardapio;
+    }
+
+    /**
+     * Set the value of idItemCardapio
+     *
+     * @param idItemCardapio new value of idItemCardapio
+     */
+    public void setIdItemCardapio(String idItemCardapio) {
+        String oldIdItemCardapio = this.idItemCardapio;
+        this.idItemCardapio = idItemCardapio;
+        propertyChangeSupport.firePropertyChange(PROP_IDITEMCARDAPIO, oldIdItemCardapio, idItemCardapio);
+    }
+
+    
     private Cardapio cardapio;
 
     public static final String PROP_CARDAPIO = "cardapio";

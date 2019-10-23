@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @author Laboratorio
  */
+
 public abstract class DAO<E> {
     protected Connection conn;
 
