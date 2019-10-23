@@ -14,10 +14,6 @@ import java.util.List;
  *
  * @author Laboratorio
  */
-<<<<<<< HEAD
-=======
-
->>>>>>> d476309784db4f1b10ae1cea5ff75ec6e889598c
 public abstract class DAO<E> {
     protected Connection conn;
 
@@ -43,8 +39,5 @@ public abstract class DAO<E> {
                     e.getMessage());
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d476309784db4f1b10ae1cea5ff75ec6e889598c
+
