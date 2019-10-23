@@ -66,17 +66,17 @@ public class Endereco {
         propertyChangeSupport.firePropertyChange(PROP_NUMERO, oldNumero, numero);
     }
 
-    private String stringbairro;
+    private String bairro;
 
     public static final String PROP_STRINGBAIRRO = "stringbairro";
 
-    public String getStringbairro() {
-        return stringbairro;
+    public String getBairro() {
+        return bairro;
     }
 
-    public void setStringbairro(String stringbairro) {
-        String oldStringbairro = this.stringbairro;
-        this.stringbairro = stringbairro;
+    public void setBairro(String stringbairro) {
+        String oldStringbairro = this.bairro;
+        this.bairro = stringbairro;
         propertyChangeSupport.firePropertyChange(PROP_STRINGBAIRRO, oldStringbairro, stringbairro);
     }
 
@@ -164,4 +164,10 @@ public class Endereco {
         propertyChangeSupport.firePropertyChange(PROP_CLIENTE, oldCliente, cliente);
     }
 
+    @Override
+    public String toString() {
+        return "Endereco{" + "idEndereco=" + idEndereco + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", cep=" + cep + ", estado=" + estado + ", complemento=" + complemento + ", restaurante=" + restaurante + ", cliente=" + cliente + '}';
+    }
+
+    
 }
