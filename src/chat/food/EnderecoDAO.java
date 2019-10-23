@@ -47,12 +47,38 @@ public class EnderecoDAO extends DAO<Endereco>{
 
     @Override
     public boolean alterar(Endereco element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql = "UPDATE endereco set logradouro=?, bairro=?, cidade=?, cep=?, estado=?, complemento=? where id_endereco=?";
+
+       try {
+           PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+    	   stmt.setString(1, element.getLogradouro());
+           stmt.setString(2, element.getBairro());
+           stmt.setString(3, element.getCidade());
+           stmt.setString(4, element.getCep());
+           stmt.setString(5, element.getEstado());
+           stmt.setString(6, element.getComplemento());
+           stmt.setInt(7, element.getIdEndereco());
+           stmt.executeUpdate();
+           return true;
+       }catch (Exception e) {
+    	   e.printStackTrace();
+	}
+       return false;
     }
 
     @Override
     public boolean excluir(Endereco element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE from endereco where id_endereco=?";
+        
+        try{
+            PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, element.getIdEndereco());
+            stmt.execute();
+            return true;
+        }catch (Exception e) {
+    	   e.printStackTrace();
+	}
+        return false;
     }
 
     @Override
