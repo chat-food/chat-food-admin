@@ -3,15 +3,12 @@ package chat.food;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Date;
+import java.util.Map;
 
 public class Pedido {
 
-    enum Status {
-        ABERTO, PREPARANDO, FINALIZADO, ENTREGUE;
-    }
-
     public Pedido() {
-        status = Status.ABERTO;
+        status = "ABERTO";
     }
 
     private int id_pedido;
@@ -42,6 +39,20 @@ public class Pedido {
 
     public static final String PROP_DESCRICAO = "descricao";
 
+    private Endereco endereco;
+
+    public static final String PROP_ENDERECO = "endereco";
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        Endereco oldEndereco = this.endereco;
+        this.endereco = endereco;
+        propertyChangeSupport.firePropertyChange(PROP_ENDERECO, oldEndereco, endereco);
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -66,16 +77,16 @@ public class Pedido {
         propertyChangeSupport.firePropertyChange(PROP_VALOR_TOTAL, oldValor_total, valor_total);
     }
 
-    private Status status;
+    private String status;
 
     public static final String PROP_STATUS = "status";
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
-        Status oldStatus = this.status;
+    public void setStatus(String status) {
+        String oldStatus = this.status;
         this.status = status;
         propertyChangeSupport.firePropertyChange(PROP_STATUS, oldStatus, status);
     }
