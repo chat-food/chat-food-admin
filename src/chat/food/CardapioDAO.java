@@ -19,7 +19,7 @@ public class CardapioDAO extends DAO<Cardapio> {
 
     @Override
     public boolean inserir(Cardapio element) {
-        try{
+        try {
             String comando = "INSERT INTO chatfood.cardapio"
                 + "(id_restaurante)"
                 + "VALUES"
@@ -35,22 +35,59 @@ public class CardapioDAO extends DAO<Cardapio> {
                 ResultSet rs = stmt.getGeneratedKeys();
                 rs.next();
                 element.setIdCardapio(rs.getInt(1));
+                
                 return true;
             }
-        }catch(SQLException e){
+        } catch(SQLException e) {
             System.out.println("erro ao inserir: "+ e.getMessage());
         }
+        
         return false;
     }
 
     @Override
     public boolean alterar(Cardapio element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String comando = "UPDATE chatfood.cardapio SET "
+                + "id_restaurante = ? "
+                + "WHERE id_cardapio = ?;";
+       
+            PreparedStatement stmt = conn.prepareStatement(
+                                comando,Statement.RETURN_GENERATED_KEYS);
+            
+            stmt.setInt(1, element.getRestaurante().getId_restaurante());
+            stmt.setInt(2, element.getIdCardapio());
+            
+            int linhas = stmt.executeUpdate();
+            if(linhas==1) {
+                return true;
+            }
+        } catch(SQLException e) {
+            System.out.println("erro ao inserir: "+ e.getMessage());
+        }
+        
+        return false;   
     }
 
     @Override
     public boolean excluir(Cardapio element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String comando = "DELETE FROM chatfood.cardapio WHERE id_cardapio = ?";
+       
+            PreparedStatement stmt = conn.prepareStatement(
+                                comando,Statement.RETURN_GENERATED_KEYS);
+            
+            stmt.setInt(1, element.getIdCardapio());
+            
+            int linhas = stmt.executeUpdate();
+            if(linhas==1) {
+                return true;
+            }
+        } catch(SQLException e) {
+            System.out.println("erro ao inserir: "+ e.getMessage());
+        }
+        
+        return false;   
     }
 
     @Override
@@ -58,11 +95,27 @@ public class CardapioDAO extends DAO<Cardapio> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
     
-    public static void main(String[] args) {
-        Restaurante r = new Restaurante(null, null, null, null, null, null);
-        Cardapio c = new Cardapio();
-        c.setRestaurante(r);
-        CardapioDAO cd = new CardapioDAO();
-        cd.inserir(c);
+    public Cardapio consultar(int idCardapio) {
+        try {
+            String comando = "SELECT * FROM chatfood.cardapio WHERE id_cardapio = ?";
+       
+            PreparedStatement stmt = conn.prepareStatement(
+                                comando,Statement.RETURN_GENERATED_KEYS);
+            
+            stmt.setInt(1, idCardapio);
+            // Instanciar DAO de Restaurante AQUI e consultar Restaurante
+            
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Cardapio c = new Cardapio();
+                c.setIdCardapio(rs.getInt(1));
+                
+                return c;
+            }
+        } catch(SQLException e) {
+            System.out.println("erro ao consultar: "+ e.getMessage());
+        }
+        
+        return null;   
     }
 }
