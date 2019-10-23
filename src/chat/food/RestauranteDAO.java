@@ -21,7 +21,6 @@ import org.jdesktop.observablecollections.ObservableCollections;
 public class RestauranteDAO extends DAO<Restaurante>{
     @Override
     public boolean inserir(Restaurante element) {
-
         try{
             String comando = "INSERT INTO restaurante "
                     + "(nome,descricao,telefone,hora_inicio,hora_fim,senha) VALUES "
@@ -102,33 +101,38 @@ public class RestauranteDAO extends DAO<Restaurante>{
         return false;    
     }
 
-    @Override
     public List<Restaurante> listar() {
-        List<Restaurante> lstRestaurantes = new LinkedList<>();
-        lstRestaurantes = ObservableCollections.observableList(lstRestaurantes);
-        
-        String sql = "SELECT * from restaurante;";
-        try{
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
+    
+    
+    public Restaurante consultar(Integer id_rest) {
+        try {
+            String sql = "SELECT * FROM restaurante WHERE id_restaurante = ?";
+       
+            PreparedStatement stmt = conn.prepareStatement(
+                                sql,Statement.RETURN_GENERATED_KEYS);
             
-            while(rs.next()){
+            stmt.setInt(1, id_rest);
+            // Instanciar DAO de Restaurante AQUI e consultar Restaurante
+            
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
                 Restaurante r = new Restaurante(rs.getString("nome"),rs.getString("telefone"),rs.getString("descricao"),rs.getTime("hora_inicio"), rs.getTime("hora_fim"));
                
-                        
                 String passwd = new String(r.getSenha());
                 char[] senhaNova = passwd.toCharArray();
                 r.setSenha(senhaNova);
                 r.setId(rs.getInt("id"));
-                lstRestaurantes.add(r);
+                
+                return r;
             }
-            
-        }catch(SQLException e){
-            System.out.println("erro ao listar");
+        } catch(SQLException e) {
+            System.out.println("erro ao consultar: "+ e.getMessage());
         }
-        return lstRestaurantes;
-    }
-    
         
+        return null; 
+        
+    }
           
 }
