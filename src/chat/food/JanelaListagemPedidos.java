@@ -27,8 +27,10 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
      * Creates new form JanelaListagemPedidos
      */
     public JanelaListagemPedidos() {
+        PedidoDAO pedidoDao = new PedidoDAO();
+        
         pedidos = new LinkedList<>();
-        pedidos = ObservableCollections.observableList(pedidos);
+        pedidos = pedidoDao.listar();
         initComponents();
         
         BindingGroup bg = new BindingGroup();
@@ -53,7 +55,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         
         cb = tb.addColumnBinding(BeanProperty.create("status"));
         cb.setColumnName("Status");
-        cb.setColumnClass(Enum.class);
+        cb.setColumnClass(String.class);
         
         bg.addBinding(tb);
         
