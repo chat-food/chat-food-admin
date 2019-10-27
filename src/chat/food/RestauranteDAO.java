@@ -9,11 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.util.LinkedList;
 import java.util.List;
-import org.jdesktop.observablecollections.ObservableCollections;
-
 /**
  *
  * @author Laboratorio
@@ -105,7 +101,6 @@ public class RestauranteDAO extends DAO<Restaurante>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
     
-    
     public Restaurante consultar(Integer id_rest) {
         try {
             String sql = "SELECT * FROM restaurante WHERE id_restaurante = ?";
@@ -132,7 +127,39 @@ public class RestauranteDAO extends DAO<Restaurante>{
         }
         
         return null; 
-        
     }
-          
+         
+    public Restaurante login(String nome, String senha) {
+        try {
+            String sql = "SELECT * FROM restaurante WHERE nome = ? AND senha = ?";
+       
+            PreparedStatement stmt = conn.prepareStatement(
+                                sql,Statement.RETURN_GENERATED_KEYS);
+            
+            stmt.setString(1, nome);
+            stmt.setString(2, senha);
+            
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Restaurante r = new Restaurante(
+                    rs.getString("nome"),
+                    rs.getString("telefone"),
+                    rs.getString("descricao"),
+                    rs.getTime("hora_inicio"),
+                    rs.getTime("hora_fim")
+                );
+               
+                String passwd = new String(rs.getString("senha"));
+                char[] senhaNova = passwd.toCharArray();
+                r.setSenha(senhaNova);
+                r.setId(rs.getInt("id_restaurante"));
+                
+                return r;
+            }
+        } catch(SQLException e) {
+            System.out.println("Erro ao realizar login: "+ e.getMessage());
+        }
+        
+        return null; 
+    }
 }

@@ -5,6 +5,8 @@
  */
 package chat.food;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Laboratorio
@@ -143,7 +145,15 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-        //validação de login e senha com o banco
+        RestauranteDAO rd = new RestauranteDAO();
+        Restaurante r = rd.login(txtLogin.getText(), txtSenha.getText());
+            
+        if (r == null) {
+            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+            return;
+        }
+        
+        Login.setInstance(r);
         new JanelaListagemPedidos().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btLoginActionPerformed
