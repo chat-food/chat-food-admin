@@ -94,4 +94,34 @@ public class PedidoDAO extends DAO<Pedido> {
         }
         return listaPedido;
     }
+    
+    public List<Pedido> listarPorRestaurante(Restaurante r) {
+        List<Pedido> listaPedido = new LinkedList<>();
+        listaPedido = ObservableCollections.observableList(listaPedido);
+        
+        String sql = "SELECT * FROM pedido WHERE id_restaurante = ?;";
+        
+        try {
+            PreparedStatement stmt = conn.prepareStatement(
+                sql,
+                Statement.RETURN_GENERATED_KEYS
+            );
+            stmt.setInt(1, r.getId_restaurante());
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Pedido p = new Pedido();
+                
+                p.setId_pedido(rs.getInt("id_pedido"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setValor_total(rs.getDouble("valor_total"));
+                
+                listaPedido.add(p);
+            }
+        } catch(SQLException e) {
+            System.out.println("Erro ao listar pedidos por restaurante: " + e.getMessage());
+        }
+        
+        return listaPedido;
+    }
 }

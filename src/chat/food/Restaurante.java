@@ -116,7 +116,6 @@ public class Restaurante {
     }
 
     public Restaurante(String n, String tele, String desc, Time inicio, Time fim) {
-        this.id_restaurante++;
         this.nome = n;
         this.telefone = tele;
         this.descricao = desc;
@@ -125,7 +124,6 @@ public class Restaurante {
     }
 
     public void setId(Integer id) {
-    Integer oldId = this.id_restaurante;
-    this.id_restaurante = id;
+        this.id_restaurante = id;
     }
 }

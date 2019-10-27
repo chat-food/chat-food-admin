@@ -28,7 +28,7 @@ public abstract class DAO<E> {
             
             String url = "jdbc:mysql://127.0.0.1:3306/chatfood?serverTimezone=UTC";
             String user = "root";
-            String passwd = "";
+            String passwd = "root";
             
             conn = DriverManager.getConnection(url, user, passwd);
         }catch(ClassNotFoundException e){

@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.BindingGroup;
-import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.JTableBinding.ColumnBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -30,7 +29,7 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         PedidoDAO pedidoDao = new PedidoDAO();
         
         pedidos = new LinkedList<>();
-        pedidos = pedidoDao.listar();
+        pedidos = pedidoDao.listarPorRestaurante(Login.getInstance());
         initComponents();
         
         BindingGroup bg = new BindingGroup();
