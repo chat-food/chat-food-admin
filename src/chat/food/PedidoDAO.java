@@ -81,8 +81,6 @@ public class PedidoDAO extends DAO<Pedido> {
                 p.setId_pedido(rs.getInt("id_pedido"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setHorario_pedido(rs.getDate("horario"));
-//                p.setRestautante(???);
-//                p.setCliente(???);
                 p.setStatus(rs.getString("status"));
                 p.setValor_total(rs.getDouble("valor_total"));
                 
@@ -115,6 +113,8 @@ public class PedidoDAO extends DAO<Pedido> {
                 p.setId_pedido(rs.getInt("id_pedido"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setValor_total(rs.getDouble("valor_total"));
+                p.setHorario_pedido(rs.getDate("horario"));
+                p.setStatus(rs.getString("status"));
                 
                 listaPedido.add(p);
             }
