@@ -95,14 +95,14 @@ public class CardapioDAO extends DAO<Cardapio> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
     
-    public Cardapio consultar(int idCardapio) {
+    public Cardapio consultarPorRestaurante(Restaurante r) {
         try {
-            String comando = "SELECT * FROM chatfood.cardapio WHERE id_cardapio = ?";
+            String comando = "SELECT * FROM chatfood.cardapio WHERE id_restaurante = ?";
        
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);
             
-            stmt.setInt(1, idCardapio);
+            stmt.setInt(1, r.getId_restaurante());
             // Instanciar DAO de Restaurante AQUI e consultar Restaurante
             
             ResultSet rs = stmt.executeQuery();
