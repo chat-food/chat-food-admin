@@ -21,36 +21,37 @@ public class ItemDAO extends DAO<ItemCardapio>{
     
     
     @Override
-    public boolean inserir(ItemCardapio element) {
-
+    public boolean inserir(ItemCardapio item) {
         try{
-            String comando = "INSERT INTO itemcardapio "
-                    + "(IdItemCardapio,nome,preco,descricao) VALUES "
-                    + "(?,?,?,?);";
+            String comando = "INSERT INTO item "
+                    + "(id_cardapio, nome, preco, descricao) "
+                    + "VALUES (?, ?, ?, ?);";
             
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);
             
-            stmt.setString(1, element.getIdItemCardapio());
-            stmt.setString(2, element.getNome());
-            stmt.setFloat(3, element.getPreco());
-            stmt.setString(4, element.getDescricao());
+            stmt.setInt(1, item.getCardapio().getIdCardapio());
+            stmt.setString(2, item.getNome());
+            stmt.setFloat(3, item.getPreco());
+            stmt.setString(4, item.getDescricao());
             
             int linhas = stmt.executeUpdate();
-            if(linhas==1) {
+            if(linhas == 1) {
                 ResultSet rs = stmt.getGeneratedKeys();
                 rs.next();
-                element.setIdItemCardapio(rs.getString(1));
+                item.setIdItemCardapio(rs.getString(1));
+        
                 return true;
             }
-        }catch(SQLException e){
-            System.out.println("erro ao inserir: "+ e.getMessage());
+        } catch(SQLException e) {
+            System.out.println("Erro ao inserir: "+ e.getMessage());
         }
+        
         return false;
     }
     
     @Override
-       public List<ItemCardapio> listar() {
+    public List<ItemCardapio> listar() {
         List<ItemCardapio> lstItemCardapio = new LinkedList<>();
         lstItemCardapio = ObservableCollections.observableList(lstItemCardapio);
         
@@ -122,5 +123,32 @@ public class ItemDAO extends DAO<ItemCardapio>{
         }
         return false;    
         
+    }
+    
+    public List<ItemCardapio> listarPorCardapio(Cardapio c) {
+        List<ItemCardapio> lstItemCardapio = new LinkedList<>();
+        lstItemCardapio = ObservableCollections.observableList(lstItemCardapio);
+        
+        String sql = "SELECT * from item WHERE id_cardapio = ?;";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, c.getIdCardapio());
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                ItemCardapio ic = new ItemCardapio();
+                ic.setIdItemCardapio(rs.getString("id_item"));
+                ic.setNome(rs.getString("nome"));
+                ic.setPreco(rs.getFloat("preco"));
+                ic.setDescricao(rs.getString("descricao"));
+                ic.setCardapio(c);
+                lstItemCardapio.add(ic);
+            }
+            
+        } catch(SQLException e) {
+            System.out.println("Erro ao lista itens do cardápio: " + e.getMessage());
+        }
+        
+        return lstItemCardapio;
     }
 }

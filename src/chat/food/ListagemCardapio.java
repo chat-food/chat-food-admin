@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.BindingGroup;
-import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.JTableBinding.ColumnBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -21,27 +20,46 @@ import org.jdesktop.swingbinding.SwingBindings;
  * @author Laboratorio
  */
 public class ListagemCardapio extends javax.swing.JFrame {
+    public BindingGroup bg;
     public List<ItemCardapio> lstItemCardapio;
+    public Cardapio cardapio;
     
     /**
      * Creates new form ListagemCardapio
      */
     public ListagemCardapio() {
         initComponents();
+        listCardapio();
         initBindings();
     }
     
+    public void listCardapio() {
+        CardapioDAO cd = new CardapioDAO();
+        ItemDAO id = new ItemDAO();
+        
+        cardapio = cd.consultarPorRestaurante(Login.getInstance());
+    
+        if (cardapio == null) {
+            cardapio = new Cardapio();
+            cardapio.setRestaurante(Login.getInstance());
+            cd.inserir(cardapio);
+        }
+        
+        lstItemCardapio = id.listarPorCardapio(cardapio);
+    }
+    
     public void initBindings() {
-        lstItemCardapio = new LinkedList<>();
-        lstItemCardapio = ObservableCollections.observableList(lstItemCardapio);
-
+        if (bg != null) {
+            bg.unbind();
+        }
+        
+        bg = new BindingGroup();
+        
         JTableBinding tb = SwingBindings.createJTableBinding(
             AutoBinding.UpdateStrategy.READ_WRITE,
             lstItemCardapio,
             tbItemCardapio
         );
-
-        BindingGroup bg = new BindingGroup();
 
         ColumnBinding cb = tb.addColumnBinding(BeanProperty.create("nome"));
         cb.setColumnName("Nome");
@@ -148,10 +166,14 @@ public class ListagemCardapio extends javax.swing.JFrame {
         ItemCardapio item = new ItemCardapio();
         CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
         
+        item.setCardapio(cardapio);
         c.setVisible(true);
         
         if (c.getSalvouItem()) {
-            lstItemCardapio.add(item);
+            ItemDAO id = new ItemDAO();
+            id.inserir(item);
+            listCardapio();
+            initBindings();
         }
     }//GEN-LAST:event_btAdicionarActionPerformed
 
