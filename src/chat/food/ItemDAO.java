@@ -77,23 +77,22 @@ public class ItemDAO extends DAO<ItemCardapio>{
     @Override
     public boolean alterar(ItemCardapio element) {
         try{
-            String comando = "UPDATE itemcardapio SET"
-                    + "IdItemCardapio= ?,nome = ?,preco = ?, descricao = ?;";
+            String comando = "UPDATE item SET nome = ?,preco = ?, descricao = ? WHERE id_item = ?;";
             
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);
             
-            stmt.setString(1, element.getIdItemCardapio());
-            stmt.setString(2, element.getNome());
-            stmt.setFloat(3, element.getPreco());
-            stmt.setString(4, element.getDescricao());
+            stmt.setString(1, element.getNome());
+            stmt.setFloat(2, element.getPreco());
+            stmt.setString(3, element.getDescricao());
+            stmt.setString(4, element.getIdItemCardapio());
         
             int linhas = stmt.executeUpdate();
             if(linhas==1) {
-                ResultSet rs = stmt.getGeneratedKeys();
-                rs.next();
                 return true;
             }
+            
+            
         }catch(SQLException e){
             
             System.out.println("erro ao alterar: "+ e.getMessage());
@@ -105,8 +104,7 @@ public class ItemDAO extends DAO<ItemCardapio>{
     @Override
     public boolean excluir(ItemCardapio element) {
         try{
-        String comando = "DELETE FROM itemcardapio"
-                + "WHERE IdItemCardapio = ?;";
+        String comando = "DELETE FROM item WHERE id_item = ?;";
                 
         
         PreparedStatement stmt = conn.prepareStatement(
@@ -119,7 +117,7 @@ public class ItemDAO extends DAO<ItemCardapio>{
             return true;
         }
         }catch(SQLException e){
-        System.out.println("erro ao inserir: "+ e.getMessage());
+        System.out.println("erro ao excluir: "+ e.getMessage());
         }
         return false;    
         

@@ -104,4 +104,6 @@ public class ItemCardapio {
         this.descricao = descricao;
         propertyChangeSupport.firePropertyChange(PROP_DESCRICAO, oldDescricao, descricao);
     }
+    
+    
 }

@@ -164,13 +164,13 @@ public class ListagemCardapio extends javax.swing.JFrame {
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
         ItemCardapio item = new ItemCardapio();
+        ItemDAO id = new ItemDAO();
         CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
         
         item.setCardapio(cardapio);
         c.setVisible(true);
         
         if (c.getSalvouItem()) {
-            ItemDAO id = new ItemDAO();
             id.inserir(item);
             listCardapio();
             initBindings();
@@ -179,15 +179,19 @@ public class ListagemCardapio extends javax.swing.JFrame {
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         int[] linhas = tbItemCardapio.getSelectedRows();
-        
         List<ItemCardapio> lstTmpItemCardapio = new LinkedList<>();
+        ItemDAO itemd = new ItemDAO();
+        
         tbItemCardapio.getSelectionModel().setSelectionInterval(0, 0);  
         for (int linha : linhas) {
             int idxLista = tbItemCardapio.convertRowIndexToModel(linha);
             lstTmpItemCardapio.add(lstItemCardapio.get(idxLista));
+            
         }
-        
+        itemd.excluir(lstTmpItemCardapio.get(tbItemCardapio.getSelectedRow()));
         lstItemCardapio.removeAll(lstTmpItemCardapio);
+
+        
     }//GEN-LAST:event_btRemoverActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
@@ -204,12 +208,22 @@ public class ListagemCardapio extends javax.swing.JFrame {
             item.setNome(itemSelecionado.getNome());
             item.setPreco(itemSelecionado.getPreco());
             item.setDescricao(itemSelecionado.getDescricao());
+            item.setIdItemCardapio(itemSelecionado.getIdItemCardapio());
             
             CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
             c.setVisible(true);
-
+               
+            ItemDAO itemd = new ItemDAO();
+            
             if (c.getSalvouItem()) {
                 lstItemCardapio.set(idxLista, item);
+                if(itemd.alterar(item))
+                {
+                    System.out.println("Alterou");
+                }
+                else
+                    System.out.println("Nao Alterou");
+                
             }
         }
     }//GEN-LAST:event_btEditarActionPerformed
