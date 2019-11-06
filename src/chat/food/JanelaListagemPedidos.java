@@ -7,6 +7,7 @@ package chat.food;
 
 import java.util.List;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -136,7 +137,27 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        // TODO add your handling code here:
+        if(tbPedidos.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione um pedido"
+            );
+        } else if (tbPedidos.getSelectedRows().length > 1) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione apenas um pedido!"
+            );
+        } else {
+            int linha = tbPedidos.getSelectedRow();
+            int idxLista = tbPedidos.convertRowIndexToModel(linha);
+            
+            Pedido pedidoSelecionado = pedidos.get(idxLista);
+            
+            TelaDetalhesPedido tdp = new TelaDetalhesPedido(pedidoSelecionado);
+            tdp.setVisible(true);
+            
+            
+        }
     }//GEN-LAST:event_detailsButtonActionPerformed
 
     private void btVisualizarCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarCardapioActionPerformed
