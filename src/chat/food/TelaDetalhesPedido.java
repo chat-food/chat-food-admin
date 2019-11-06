@@ -14,7 +14,7 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
     /**
      * Creates new form TelaDetalhesPedido
      */
-    public TelaDetalhesPedido() {
+    public TelaDetalhesPedido(Pedido pedido) {
         initComponents();
     }
 
@@ -32,8 +32,6 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btEditar = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbDetalhes = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,31 +57,12 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
         });
         jPanel1.add(btVoltar);
 
-        tbDetalhes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Produto", "Valor Un.", "Quantidade", "Valor Total"
+        jTextField1.setEditable(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
-        ));
-        tbDetalhes.setAutoscrolls(false);
-        tbDetalhes.setColumnSelectionAllowed(true);
-        tbDetalhes.setName(""); // NOI18N
-        jScrollPane1.setViewportView(tbDetalhes);
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,8 +79,7 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addComponent(lblDetalherPedido)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,9 +90,7 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(lblDetalherPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -129,7 +105,11 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btEditarActionPerformed
 
-    /**
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    /**;
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -159,7 +139,10 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaDetalhesPedido().setVisible(true);
+                Pedido p = new Pedido();
+                p.setId_pedido(123);
+                
+                new TelaDetalhesPedido(p).setVisible(true);
             }
         });
     }
@@ -168,10 +151,8 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblDetalherPedido;
     private javax.swing.JLabel lblNPedido;
-    private javax.swing.JTable tbDetalhes;
     // End of variables declaration//GEN-END:variables
 }
