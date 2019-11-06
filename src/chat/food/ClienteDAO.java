@@ -120,4 +120,27 @@ public class ClienteDAO extends DAO<Cliente>{
         return false;    
         
     }
+    
+ public Cliente getById(int id) {
+
+        String sql = "SELECT * from cliente where id_cliente = ?;";
+        try{
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Cliente c = new Cliente();
+                c.setIdCliente(rs.getInt("id_cliente"));
+                c.setNome(rs.getString("nome"));
+                c.setTelefone(rs.getString("telefone"));
+                return c;
+            }
+            
+        }catch(SQLException e){
+            System.out.println("erro ao listar");
+        }
+        return null;
+    }    
 }
+
+

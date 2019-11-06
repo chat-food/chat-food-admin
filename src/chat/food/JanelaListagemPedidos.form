@@ -25,11 +25,15 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" max="32767" attributes="0"/>
-          <Component id="ListaPedidos" alignment="0" pref="395" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
+          <Component id="ListaPedidos" alignment="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="prpbtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="fnzbtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="entbtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btVisualizarCardapio" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -37,9 +41,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="ListaPedidos" min="-2" pref="183" max="-2" attributes="0"/>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
-              <Component id="btVisualizarCardapio" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="prpbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fnzbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="entbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -54,6 +62,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirmar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="detailsButton">
           <Properties>
@@ -62,6 +73,16 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="detailsButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btVisualizarCardapio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Visualizar Card&#xe1;pio"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVisualizarCardapioActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
       </SubComponents>
     </Container>
@@ -86,12 +107,28 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btVisualizarCardapio">
+    <Component class="javax.swing.JButton" name="prpbtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Visualizar Card&#xe1;pio"/>
+        <Property name="text" type="java.lang.String" value="Preparando"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVisualizarCardapioActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prpbtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="fnzbtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Finalizado"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fnzbtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="entbtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entregue"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entbtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

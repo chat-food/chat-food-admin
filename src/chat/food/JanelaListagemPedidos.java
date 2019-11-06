@@ -22,6 +22,7 @@ import org.jdesktop.swingbinding.SwingBindings;
 public class JanelaListagemPedidos extends javax.swing.JFrame {
 
     private List<Pedido> pedidos;
+    private Restaurante res = Login.getInstance();
     
     /**
      * Creates new form JanelaListagemPedidos
@@ -74,14 +75,23 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         confirmButton = new javax.swing.JButton();
         detailsButton = new javax.swing.JButton();
+        btVisualizarCardapio = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         ListaPedidos = new javax.swing.JScrollPane();
         tbPedidos = new javax.swing.JTable();
-        btVisualizarCardapio = new javax.swing.JButton();
+        prpbtn = new javax.swing.JButton();
+        fnzbtn = new javax.swing.JButton();
+        entbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listagem de Pedidos");
 
         confirmButton.setText("Confirmar");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(confirmButton);
 
         detailsButton.setText("Detalhes");
@@ -91,6 +101,15 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(detailsButton);
+
+        btVisualizarCardapio.setText("Visualizar Cardápio");
+        btVisualizarCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisualizarCardapioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btVisualizarCardapio);
+        jPanel1.add(jSeparator1);
 
         tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,10 +124,24 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         ));
         ListaPedidos.setViewportView(tbPedidos);
 
-        btVisualizarCardapio.setText("Visualizar Cardápio");
-        btVisualizarCardapio.addActionListener(new java.awt.event.ActionListener() {
+        prpbtn.setText("Preparando");
+        prpbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVisualizarCardapioActionPerformed(evt);
+                prpbtnActionPerformed(evt);
+            }
+        });
+
+        fnzbtn.setText("Finalizado");
+        fnzbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnzbtnActionPerformed(evt);
+            }
+        });
+
+        entbtn.setText("Entregue");
+        entbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entbtnActionPerformed(evt);
             }
         });
 
@@ -117,19 +150,26 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ListaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btVisualizarCardapio)
-                .addGap(134, 134, 134))
+            .addComponent(ListaPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(prpbtn)
+                .addGap(18, 18, 18)
+                .addComponent(fnzbtn)
+                .addGap(25, 25, 25)
+                .addComponent(entbtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(ListaPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(btVisualizarCardapio)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prpbtn)
+                    .addComponent(fnzbtn)
+                    .addComponent(entbtn))
+                .addGap(37, 37, 37)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -165,6 +205,54 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         new ListagemCardapio().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVisualizarCardapioActionPerformed
+
+    private void prpbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prpbtnActionPerformed
+       if (tbPedidos.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um pedido!");
+        } else if (tbPedidos.getSelectedRows().length > 1) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione apenas um pedido!");
+        } else {
+            int linha = tbPedidos.getSelectedRow();
+            int idxLista = tbPedidos.convertRowIndexToModel(linha);
+            
+            Pedido pedidoSelecionado = pedidos.get(idxLista);
+            pedidoSelecionado.setStatus("Preparando");
+            Pedido p = new Pedido();
+            
+            p.setId_pedido(pedidoSelecionado.getId_pedido());
+            p.setRestaurante(res);
+            p.setCliente(pedidoSelecionado.getCliente());
+            p.setDescricao(pedidoSelecionado.getDescricao());
+            p.setHorario_pedido(pedidoSelecionado.getHorario_pedido());
+            p.setStatus(pedidoSelecionado.getStatus());
+            p.setValor_total(pedidoSelecionado.getValor_total());
+            p.setEndereco(pedidoSelecionado.getEndereco());
+            
+                     
+            PedidoDAO pd = new PedidoDAO();
+            
+            try{ 
+                pd.alterar(p);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            
+            
+            
+        }
+    }//GEN-LAST:event_prpbtnActionPerformed
+
+    private void fnzbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnzbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnzbtnActionPerformed
+
+    private void entbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entbtnActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,7 +294,11 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
     private javax.swing.JButton btVisualizarCardapio;
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton detailsButton;
+    private javax.swing.JButton entbtn;
+    private javax.swing.JButton fnzbtn;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton prpbtn;
     private javax.swing.JTable tbPedidos;
     // End of variables declaration//GEN-END:variables
 }

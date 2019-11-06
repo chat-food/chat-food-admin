@@ -56,7 +56,34 @@ public class PedidoDAO extends DAO<Pedido> {
 
     @Override
     public boolean alterar(Pedido element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String comando = "UPDATE pedido SET "
+                    + "id_restaurante = ?, id_cliente = ?, descricao = ?, "
+                    + "horario = ?, status = ?, valor_total = ?, id_endereco = ? where id_pedido = ?;";
+            
+            PreparedStatement stmt = conn.prepareStatement(
+                                comando,Statement.RETURN_GENERATED_KEYS);
+            
+            stmt.setInt(1, element.getRestaurante().getId_restaurante());
+            stmt.setInt(2, element.getCliente().getIdCliente());
+            stmt.setString(3, element.getDescricao());
+            stmt.setDate(4, (Date) element.getHorario_pedido());
+            stmt.setString(5, element.getStatus());
+            stmt.setDouble(6, element.getValor_total());
+            stmt.setInt(7, element.getEndereco().getIdEndereco());
+            stmt.setInt(8, element.getId_pedido());
+        
+            int linhas = stmt.executeUpdate();
+            if(linhas==1) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                rs.next();
+                return true;
+            }
+        }catch(SQLException e){
+            
+            System.out.println("erro ao alterar: "+ e.getMessage());
+        }
+        return false;
     }
 
     @Override
@@ -70,6 +97,7 @@ public class PedidoDAO extends DAO<Pedido> {
         listaPedido = ObservableCollections.observableList(listaPedido);
         
         String sql = "SELECT * from pedido;";
+        ClienteDAO dao = new ClienteDAO();
         
         try{
             Statement stmt = conn.createStatement();
@@ -83,7 +111,7 @@ public class PedidoDAO extends DAO<Pedido> {
                 p.setHorario_pedido(rs.getDate("horario"));
                 p.setStatus(rs.getString("status"));
                 p.setValor_total(rs.getDouble("valor_total"));
-                
+                p.setCliente(dao.getById(rs.getInt("id_cliente")));
                 listaPedido.add(p);
             }
             
@@ -98,7 +126,7 @@ public class PedidoDAO extends DAO<Pedido> {
         listaPedido = ObservableCollections.observableList(listaPedido);
         
         String sql = "SELECT * FROM pedido WHERE id_restaurante = ?;";
-        
+        ClienteDAO dao = new ClienteDAO();
         try {
             PreparedStatement stmt = conn.prepareStatement(
                 sql,
@@ -115,6 +143,7 @@ public class PedidoDAO extends DAO<Pedido> {
                 p.setValor_total(rs.getDouble("valor_total"));
                 p.setHorario_pedido(rs.getDate("horario"));
                 p.setStatus(rs.getString("status"));
+                p.setCliente(dao.getById(rs.getInt("id_cliente")));
                 
                 listaPedido.add(p);
             }
