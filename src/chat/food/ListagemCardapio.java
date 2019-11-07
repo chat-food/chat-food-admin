@@ -89,7 +89,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
 
         spItensCardapio = new javax.swing.JScrollPane();
         tbItemCardapio = new javax.swing.JTable();
-        pnBotoes = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         btListagemPedidos = new javax.swing.JButton();
         btAdicionar = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
@@ -99,6 +100,7 @@ public class ListagemCardapio extends javax.swing.JFrame {
         setTitle("Listagem Cardápio");
 
         tbItemCardapio.setAutoCreateRowSorter(true);
+        tbItemCardapio.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         tbItemCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -112,86 +114,124 @@ public class ListagemCardapio extends javax.swing.JFrame {
         ));
         spItensCardapio.setViewportView(tbItemCardapio);
 
-        btListagemPedidos.setText("Listagem dos Pedidos");
+        jPanel1.setBackground(new java.awt.Color(246, 71, 71));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cardápio");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(216, 216, 216)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btListagemPedidos.setBackground(new java.awt.Color(246, 71, 71));
+        btListagemPedidos.setForeground(new java.awt.Color(255, 255, 255));
+        btListagemPedidos.setText("Voltar");
+        btListagemPedidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btListagemPedidos.setBorderPainted(false);
         btListagemPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btListagemPedidosActionPerformed(evt);
             }
         });
-        pnBotoes.add(btListagemPedidos);
 
+        btAdicionar.setBackground(new java.awt.Color(25, 181, 254));
+        btAdicionar.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        btAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         btAdicionar.setText("Adicionar");
+        btAdicionar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btAdicionar.setBorderPainted(false);
         btAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdicionarActionPerformed(evt);
             }
         });
-        pnBotoes.add(btAdicionar);
 
+        btEditar.setBackground(new java.awt.Color(41, 241, 195));
+        btEditar.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         btEditar.setText("Editar");
+        btEditar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btEditar.setBorderPainted(false);
         btEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEditarActionPerformed(evt);
             }
         });
-        pnBotoes.add(btEditar);
 
+        btRemover.setBackground(new java.awt.Color(244, 247, 118));
+        btRemover.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         btRemover.setText("Remover");
+        btRemover.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btRemover.setBorderPainted(false);
         btRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btRemoverActionPerformed(evt);
             }
         });
-        pnBotoes.add(btRemover);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-            .addComponent(pnBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(btListagemPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(spItensCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(spItensCardapio, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 38, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btListagemPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
 
-        setBounds(0, 0, 544, 401);
+        setBounds(0, 0, 544, 452);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        ItemCardapio item = new ItemCardapio();
-        ItemDAO id = new ItemDAO();
-        CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
-        
-        item.setCardapio(cardapio);
-        c.setVisible(true);
-        
-        if (c.getSalvouItem()) {
-            id.inserir(item);
-            listCardapio();
-            initBindings();
-        }
-    }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         int[] linhas = tbItemCardapio.getSelectedRows();
         List<ItemCardapio> lstTmpItemCardapio = new LinkedList<>();
         ItemDAO itemd = new ItemDAO();
-        
-        tbItemCardapio.getSelectionModel().setSelectionInterval(0, 0);  
+
+        tbItemCardapio.getSelectionModel().setSelectionInterval(0, 0);
         for (int linha : linhas) {
             int idxLista = tbItemCardapio.convertRowIndexToModel(linha);
             lstTmpItemCardapio.add(lstItemCardapio.get(idxLista));
-            
+
         }
         itemd.excluir(lstTmpItemCardapio.get(tbItemCardapio.getSelectedRow()));
         lstItemCardapio.removeAll(lstTmpItemCardapio);
 
-        
     }//GEN-LAST:event_btRemoverActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
@@ -202,19 +242,19 @@ public class ListagemCardapio extends javax.swing.JFrame {
         } else {
             int linha = tbItemCardapio.getSelectedRow();
             int idxLista = tbItemCardapio.convertRowIndexToModel(linha);
-            
+
             ItemCardapio itemSelecionado = lstItemCardapio.get(idxLista);
             ItemCardapio item = new ItemCardapio();
             item.setNome(itemSelecionado.getNome());
             item.setPreco(itemSelecionado.getPreco());
             item.setDescricao(itemSelecionado.getDescricao());
             item.setIdItemCardapio(itemSelecionado.getIdItemCardapio());
-            
+
             CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
             c.setVisible(true);
-               
+
             ItemDAO itemd = new ItemDAO();
-            
+
             if (c.getSalvouItem()) {
                 lstItemCardapio.set(idxLista, item);
                 if(itemd.alterar(item))
@@ -222,11 +262,26 @@ public class ListagemCardapio extends javax.swing.JFrame {
                     System.out.println("Alterou");
                 }
                 else
-                    System.out.println("Nao Alterou");
-                
+                System.out.println("Nao Alterou");
+
             }
         }
     }//GEN-LAST:event_btEditarActionPerformed
+
+    private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
+        ItemCardapio item = new ItemCardapio();
+        ItemDAO id = new ItemDAO();
+        CadastroItemCardapio c = new CadastroItemCardapio(this, true, item);
+
+        item.setCardapio(cardapio);
+        c.setVisible(true);
+
+        if (c.getSalvouItem()) {
+            id.inserir(item);
+            listCardapio();
+            initBindings();
+        }
+    }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btListagemPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListagemPedidosActionPerformed
         new JanelaListagemPedidos().setVisible(true);
@@ -273,7 +328,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btListagemPedidos;
     private javax.swing.JButton btRemover;
-    private javax.swing.JPanel pnBotoes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane spItensCardapio;
     private javax.swing.JTable tbItemCardapio;
     // End of variables declaration//GEN-END:variables
