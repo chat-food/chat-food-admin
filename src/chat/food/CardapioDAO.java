@@ -20,7 +20,7 @@ public class CardapioDAO extends DAO<Cardapio> {
     @Override
     public boolean inserir(Cardapio element) {
         try {
-            String comando = "INSERT INTO chatfood.cardapio"
+            String comando = "INSERT INTO cardapio"
                 + "(id_restaurante)"
                 + "VALUES"
                 + "(?);";
@@ -48,7 +48,7 @@ public class CardapioDAO extends DAO<Cardapio> {
     @Override
     public boolean alterar(Cardapio element) {
         try {
-            String comando = "UPDATE chatfood.cardapio SET "
+            String comando = "UPDATE cardapio SET "
                 + "id_restaurante = ? "
                 + "WHERE id_cardapio = ?;";
        
@@ -72,7 +72,7 @@ public class CardapioDAO extends DAO<Cardapio> {
     @Override
     public boolean excluir(Cardapio element) {
         try {
-            String comando = "DELETE FROM chatfood.cardapio WHERE id_cardapio = ?";
+            String comando = "DELETE FROM cardapio WHERE id_cardapio = ?";
        
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);
@@ -97,7 +97,7 @@ public class CardapioDAO extends DAO<Cardapio> {
     
     public Cardapio consultarPorRestaurante(Restaurante r) {
         try {
-            String comando = "SELECT * FROM chatfood.cardapio WHERE id_restaurante = ?";
+            String comando = "SELECT * FROM cardapio WHERE id_restaurante = ?";
        
             PreparedStatement stmt = conn.prepareStatement(
                                 comando,Statement.RETURN_GENERATED_KEYS);

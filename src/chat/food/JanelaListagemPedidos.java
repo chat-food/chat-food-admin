@@ -60,6 +60,24 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         bg.addBinding(tb);
         
         bg.bind();
+        
+
+        Thread threadListagem = new Thread() {
+            public void run() {
+                try {
+                    while(true) {
+                        Thread.sleep(10000);
+                        List<Pedido> pedidosThread = pedidoDao.listarPorRestaurante(Login.getInstance());
+                        pedidos.clear();
+                        pedidos.addAll(pedidosThread);
+                    }
+                } catch(InterruptedException v) {
+                    System.out.println(v);
+                }
+            }  
+        };
+
+        threadListagem.start();
     }
 
     /**
