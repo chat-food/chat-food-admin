@@ -215,7 +215,8 @@ public class ListagemCardapio extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        setBounds(0, 0, 544, 452);
+        setSize(new java.awt.Dimension(544, 452));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed

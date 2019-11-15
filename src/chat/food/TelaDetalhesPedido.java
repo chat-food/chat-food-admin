@@ -51,7 +51,6 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
         txtHorario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
-        btEditar = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblDetalherPedido = new javax.swing.JLabel();
@@ -78,18 +77,6 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
         jLabel3.setText("Status:");
 
         txtStatus.setEditable(false);
-
-        btEditar.setBackground(new java.awt.Color(25, 181, 254));
-        btEditar.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        btEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btEditar.setText("Confirmar");
-        btEditar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btEditar.setBorderPainted(false);
-        btEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEditarActionPerformed(evt);
-            }
-        });
 
         btVoltar.setBackground(new java.awt.Color(246, 71, 71));
         btVoltar.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
@@ -132,9 +119,7 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(45, 414, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(jLabel2)
@@ -179,24 +164,17 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(550, 409));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
-
-    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        pedidoSelecionado.setStatus("CONFIRMADO");
-        
-        // TODO: Fazer DAO de update para atualizar status do pedido
-    }//GEN-LAST:event_btEditarActionPerformed
 
     /**;
      * @param args the command line arguments
@@ -237,7 +215,6 @@ public class TelaDetalhesPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btEditar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

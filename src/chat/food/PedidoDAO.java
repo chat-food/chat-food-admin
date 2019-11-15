@@ -56,7 +56,30 @@ public class PedidoDAO extends DAO<Pedido> {
 
     @Override
     public boolean alterar(Pedido element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String comando = "UPDATE pedido SET "
+                    + "descricao = ?, "
+                    + "status = ?, valor_total = ?  where id_pedido = ?;";
+
+            PreparedStatement stmt = conn.prepareStatement(
+                                comando,Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, element.getDescricao());
+            stmt.setString(2, element.getStatus());
+            stmt.setDouble(3, element.getValor_total());
+            stmt.setInt(4, element.getId_pedido());
+
+            int linhas = stmt.executeUpdate();
+            if(linhas==1) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                rs.next();
+                return true;
+            }
+        }catch(SQLException e){
+
+            System.out.println("erro ao alterar: "+ e.getMessage());
+        }
+        return false;
     }
 
     @Override

@@ -96,6 +96,8 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ListaPedidos = new javax.swing.JScrollPane();
         tbPedidos = new javax.swing.JTable();
+        confirmButton1 = new javax.swing.JButton();
+        confirmButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listagem de Pedidos");
@@ -124,11 +126,15 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
             }
         });
 
-        confirmButton.setBackground(new java.awt.Color(25, 181, 254));
+        confirmButton.setBackground(new java.awt.Color(244, 247, 118));
         confirmButton.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
-        confirmButton.setForeground(new java.awt.Color(255, 255, 255));
-        confirmButton.setText("Confirmar");
+        confirmButton.setText("Preparando");
         confirmButton.setBorderPainted(false);
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(246, 71, 71));
 
@@ -169,34 +175,67 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
                 .addComponent(ListaPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        confirmButton1.setBackground(new java.awt.Color(25, 181, 254));
+        confirmButton1.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
+        confirmButton1.setForeground(new java.awt.Color(255, 255, 255));
+        confirmButton1.setText("Finalizado");
+        confirmButton1.setBorderPainted(false);
+        confirmButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButton1ActionPerformed(evt);
+            }
+        });
+
+        confirmButton2.setBackground(new java.awt.Color(25, 181, 254));
+        confirmButton2.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
+        confirmButton2.setForeground(new java.awt.Color(255, 255, 255));
+        confirmButton2.setText("Entregue");
+        confirmButton2.setBorderPainted(false);
+        confirmButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(btVisualizarCardapio, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(detailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(confirmButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(confirmButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(btVisualizarCardapio, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(detailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(detailsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btVisualizarCardapio, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(652, 453));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
@@ -228,6 +267,78 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
         new ListagemCardapio().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVisualizarCardapioActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        if(tbPedidos.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione um pedido"
+            );
+        } else if (tbPedidos.getSelectedRows().length > 1) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione apenas um pedido!"
+            );
+        } else {
+            int linha = tbPedidos.getSelectedRow();
+            int idxLista = tbPedidos.convertRowIndexToModel(linha);
+            
+            Pedido pedidoSelecionado = pedidos.get(idxLista);
+            
+            pedidoSelecionado.setStatus("preparando");
+            
+            PedidoDAO pd = new PedidoDAO();
+            pd.alterar(pedidoSelecionado);
+        }
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void confirmButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButton1ActionPerformed
+        if(tbPedidos.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione um pedido"
+            );
+        } else if (tbPedidos.getSelectedRows().length > 1) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione apenas um pedido!"
+            );
+        } else {
+            int linha = tbPedidos.getSelectedRow();
+            int idxLista = tbPedidos.convertRowIndexToModel(linha);
+            
+            Pedido pedidoSelecionado = pedidos.get(idxLista);
+            
+            pedidoSelecionado.setStatus("finalizado");
+            
+            PedidoDAO pd = new PedidoDAO();
+            pd.alterar(pedidoSelecionado);
+        }
+    }//GEN-LAST:event_confirmButton1ActionPerformed
+
+    private void confirmButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButton2ActionPerformed
+        if(tbPedidos.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione um pedido"
+            );
+        } else if (tbPedidos.getSelectedRows().length > 1) {
+            JOptionPane.showMessageDialog(
+                rootPane, 
+                "Selecione apenas um pedido!"
+            );
+        } else {
+            int linha = tbPedidos.getSelectedRow();
+            int idxLista = tbPedidos.convertRowIndexToModel(linha);
+            
+            Pedido pedidoSelecionado = pedidos.get(idxLista);
+            
+            pedidoSelecionado.setStatus("entregue");
+            
+            PedidoDAO pd = new PedidoDAO();
+            pd.alterar(pedidoSelecionado);
+        }
+    }//GEN-LAST:event_confirmButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,6 +379,8 @@ public class JanelaListagemPedidos extends javax.swing.JFrame {
     private javax.swing.JScrollPane ListaPedidos;
     private javax.swing.JButton btVisualizarCardapio;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JButton confirmButton1;
+    private javax.swing.JButton confirmButton2;
     private javax.swing.JButton detailsButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
